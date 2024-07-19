@@ -1,13 +1,14 @@
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
-public class SepAndFill {
-    public static Map<String, Integer> readFromFile(File file, Map<String, Integer> words)
+public class Separator {
+    public static Map<String, Integer> readFromFile(Map<String, Integer> words)
     {
+        File file = new File("src/main/resources/text.txt");
+
         Scanner scanner;
         try {
             scanner = new Scanner(file);
