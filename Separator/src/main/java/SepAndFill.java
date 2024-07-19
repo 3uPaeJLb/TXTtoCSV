@@ -6,7 +6,7 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class SepAndFill {
-    public static HashMap<String, Integer> readFromFile(File file, HashMap<String, Integer> words)
+    public static Map<String, Integer> readFromFile(File file, Map<String, Integer> words)
     {
         Scanner scanner;
         try {
@@ -23,7 +23,7 @@ public class SepAndFill {
         return words;
     }
 
-    public static void separate(String str, HashMap<String, Integer> words) {
+    public static void separate(String str, Map<String, Integer> words) {
         String[] strings;
         strings = str.split(" ");
 
@@ -50,7 +50,7 @@ public class SepAndFill {
             }
         }
     }
-    public static void fillCSV(HashMap<String, Integer> words) throws IOException {
+    public static void fillCSV(Map<String, Integer> words) throws IOException {
         FileWriter writer = new FileWriter("data.csv");
         String key;
         int value;

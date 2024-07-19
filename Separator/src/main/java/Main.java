@@ -7,7 +7,7 @@ import java.io.File;
 
 public class Main {
 
-    public static HashMap<String, Integer> words = new HashMap<>();
+    public static Map<String, Integer> words = new HashMap<>();
     public static File file = new File("src/main/resources/text.txt");
 
     public static void main(String[] args)  {
