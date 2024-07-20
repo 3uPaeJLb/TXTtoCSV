@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.Map;
 
 public class PusherIntoCSV {
-    static final String CSV_PATH = "data.csv";
+    private static final String CSV_PATH = "data.csv";
 
     public void fillCSV(Map<String, Integer> words) throws IOException {
         File csv = new File("CSV_PATH");

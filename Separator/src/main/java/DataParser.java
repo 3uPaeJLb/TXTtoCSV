@@ -1,12 +1,11 @@
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
-public class Separator {
-    static final String FILE_PATH = "src/main/resources/text.txt";
+public class DataParser {
+   private static final String FILE_PATH = "src/main/resources/text.txt";
 
     public void readFromFile()
     {
