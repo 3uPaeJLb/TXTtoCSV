@@ -5,11 +5,17 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class DataParser {
-   private static final String FILE_PATH = "src/main/resources/text.txt";
+    private static final String FILE_PATH = "src/main/resources/text.txt";
+    private Map<String, Integer> wordsMap = new HashMap<>();
+    private DataWriter dataWriter;
+
+    public DataParser()
+    {
+        dataWriter = new DataWriter();
+    }
 
     public void readFromFile()
     {
-        Map<String, Integer> words = new HashMap<>();
         File file = new File(FILE_PATH);
 
         Scanner scanner;
@@ -19,44 +25,41 @@ public class DataParser {
             while (scanner.hasNextLine()) {
                 String str = scanner.nextLine();
 
-                separate(str, words);
+                separate(str);
             }
-        } catch (IOException e) {
-            System.out.println("File is empty!");
-        }
 
-        try {
-            PusherIntoCSV pusher = new PusherIntoCSV();
-            pusher.fillCSV(words);
-        } catch (IOException e) {
+
+            dataWriter.fillCSV(wordsMap);
+        }
+        catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
-    private void separate(String str, Map<String, Integer> words) {
-        String[] strings;
-        strings = str.split(" ");
+    private void separate(String str) {
+        String[] words;
+        words = str.split(" ");
 
-        if (words.size() != 0) {
+        if (wordsMap.size() != 0) {
             boolean found;
-            for (int i = 0; i < strings.length; i++)
+            for (int i = 0; i < words.length; i++)
             {
-                found = words.containsKey(strings[i]);
+                found = wordsMap.containsKey(words[i]);
 
                 if (found)
                 {
-                    int value = words.get(strings[i]);
-                    words.put(strings[i], value + 1);
+                    int value = wordsMap.get(words[i]);
+                    wordsMap.put(words[i], value + 1);
                 }
                 else
-                    words.put(strings[i], 1);
+                    wordsMap.put(words[i], 1);
             }
         }
         else
         {
-            for (int i = 0; i < strings.length; i++)
+            for (int i = 0; i < words.length; i++)
             {
-                words.put(strings[i], 1);
+                wordsMap.put(words[i], 1);
             }
         }
     }
