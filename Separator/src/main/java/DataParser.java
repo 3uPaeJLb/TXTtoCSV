@@ -28,7 +28,6 @@ public class DataParser {
                 separate(str);
             }
 
-
             dataWriter.fillCSV(wordsMap);
         }
         catch (IOException e) {
@@ -40,27 +39,19 @@ public class DataParser {
         String[] words;
         words = str.split(" ");
 
-        if (wordsMap.size() != 0) {
-            boolean found;
-            for (int i = 0; i < words.length; i++)
-            {
-                found = wordsMap.containsKey(words[i]);
-
-                if (found)
-                {
-                    int value = wordsMap.get(words[i]);
-                    wordsMap.put(words[i], value + 1);
-                }
-                else
-                    wordsMap.put(words[i], 1);
-            }
-        }
-        else
+        boolean found;
+        for (String word : words)
         {
-            for (int i = 0; i < words.length; i++)
+            found = wordsMap.containsKey(word);
+
+            if (found)
             {
-                wordsMap.put(words[i], 1);
+                int value = wordsMap.get(word);
+                wordsMap.put(word, value + 1);
             }
+            else
+                wordsMap.put(word, 1);
         }
+
     }
 }
