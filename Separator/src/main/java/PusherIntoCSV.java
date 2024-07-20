@@ -3,11 +3,12 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Map;
 
-public class FilePusher {
-    static final File CSV = new File("data.csv");
+public class PusherIntoCSV {
+    final String csvPath = "data.csv";
 
     public void fillCSV(Map<String, Integer> words) throws IOException {
-        FileWriter writer = new FileWriter("CSV");
+        File csv = new File("csvPath");
+        FileWriter writer = new FileWriter(csv);
 
         for (Map.Entry<String, Integer> entry : words.entrySet()) {
             writer.write(entry.getKey() + ", " + entry.getValue() + "\n");

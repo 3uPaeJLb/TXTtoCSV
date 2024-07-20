@@ -5,13 +5,14 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class Separator {
-    static final File FILE = new File("src/main/resources/text.txt");
+    final String filePath = "src/main/resources/text.txt";
 
     public Map<String, Integer> readFromFile(Map<String, Integer> words)
     {
+        File file = new File(filePath);
         Scanner scanner;
         try {
-            scanner = new Scanner(FILE);
+            scanner = new Scanner(file);
 
             while (scanner.hasNextLine()) {
                 String str = scanner.nextLine();
