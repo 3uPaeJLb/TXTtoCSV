@@ -1,15 +1,18 @@
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
 public class Separator {
-    final String filePath = "src/main/resources/text.txt";
+    static final String FILE_PATH = "src/main/resources/text.txt";
 
-    public Map<String, Integer> readFromFile(Map<String, Integer> words)
+    public void readFromFile()
     {
-        File file = new File(filePath);
+        Map<String, Integer> words = new HashMap<>();
+        File file = new File(FILE_PATH);
+
         Scanner scanner;
         try {
             scanner = new Scanner(file);
@@ -22,7 +25,13 @@ public class Separator {
         } catch (IOException e) {
             System.out.println("File is empty!");
         }
-        return words;
+
+        try {
+            PusherIntoCSV pusher = new PusherIntoCSV();
+            pusher.fillCSV(words);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private void separate(String str, Map<String, Integer> words) {
