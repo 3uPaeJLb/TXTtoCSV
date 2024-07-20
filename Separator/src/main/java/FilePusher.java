@@ -1,17 +1,16 @@
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Map;
 
 public class FilePusher {
-    public static void fillCSV(Map<String, Integer> words) throws IOException {
-        FileWriter writer = new FileWriter("data.csv");
-        String key;
-        int value;
-        for (Map.Entry<String, Integer> entry : words.entrySet()) {
-            key = entry.getKey();
-            value = entry.getValue();
+    static final File CSV = new File("data.csv");
 
-            writer.write(key + ", " + value + "\n");
+    public void fillCSV(Map<String, Integer> words) throws IOException {
+        FileWriter writer = new FileWriter("CSV");
+
+        for (Map.Entry<String, Integer> entry : words.entrySet()) {
+            writer.write(entry.getKey() + ", " + entry.getValue() + "\n");
         }
         writer.close();
     }

@@ -4,14 +4,15 @@ import java.util.Map;
 import java.io.File;
 
 public class Main {
-
     public static Map<String, Integer> words = new HashMap<>();
 
     public static void main(String[] args)  {
-        words = Separator.readFromFile(words);
+        Separator separator = new Separator();
+        words = separator.readFromFile(words);
 
         try {
-            FilePusher.fillCSV(words);
+            FilePusher filePusher = new FilePusher();
+            filePusher.fillCSV(words);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

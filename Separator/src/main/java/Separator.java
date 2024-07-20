@@ -5,13 +5,13 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class Separator {
-    public static Map<String, Integer> readFromFile(Map<String, Integer> words)
-    {
-        File file = new File("src/main/resources/text.txt");
+    static final File FILE = new File("src/main/resources/text.txt");
 
+    public Map<String, Integer> readFromFile(Map<String, Integer> words)
+    {
         Scanner scanner;
         try {
-            scanner = new Scanner(file);
+            scanner = new Scanner(FILE);
 
             while (scanner.hasNextLine()) {
                 String str = scanner.nextLine();
@@ -24,7 +24,7 @@ public class Separator {
         return words;
     }
 
-    public static void separate(String str, Map<String, Integer> words) {
+    private void separate(String str, Map<String, Integer> words) {
         String[] strings;
         strings = str.split(" ");
 
@@ -50,17 +50,5 @@ public class Separator {
                 words.put(strings[i], 1);
             }
         }
-    }
-    public static void fillCSV(Map<String, Integer> words) throws IOException {
-        FileWriter writer = new FileWriter("data.csv");
-        String key;
-        int value;
-        for (Map.Entry<String, Integer> entry : words.entrySet()) {
-            key = entry.getKey();
-            value = entry.getValue();
-
-            writer.write(key + ", " + value + "\n");
-        }
-        writer.close();
     }
 }
