@@ -1,18 +1,26 @@
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Map;
+import java.util.*;
 
 public class DataWriter {
-    private static final String CSV_PATH = "data.csv";
 
-    public void fillCSV(Map<String, Integer> words) throws IOException {
-        File csv = new File(CSV_PATH);
+    public void fillCSV(Map<String, Integer> words, String outputFile) throws IOException {
+        File csv = new File(outputFile);
         FileWriter writer = new FileWriter(csv);
+        Map<String, Integer> sortedWords = new LinkedHashMap<>();
+        List<Map.Entry<String, Integer>> sortedList = new ArrayList<>(words.entrySet());
+        
+        sortedList.sort(Map.Entry.comparingByValue());
 
-        for (Map.Entry<String, Integer> entry : words.entrySet()) {
+        for (Map.Entry<String, Integer> entry : sortedList) {
+            sortedWords.put(entry.getKey(), entry.getValue());
+        }
+
+        for (Map.Entry<String, Integer> entry : sortedWords.entrySet()) {
             writer.write(entry.getKey() + ", " + entry.getValue() + "\n");
         }
+
         writer.close();
     }
 }
