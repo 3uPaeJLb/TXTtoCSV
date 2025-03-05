@@ -5,18 +5,12 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class DataParser {
-    private static final String FILE_PATH = "src/main/resources/text.txt";
-    private Map<String, Integer> wordsMap = new HashMap<>();
-    private DataWriter dataWriter;
+    //private static final String FILE_PATH = "C:/Users/marti/Desktop/TXTtoCSV/Separator/src/main/resources/text.txt";
+    public Map<String, Integer> wordsMap = new HashMap<>();
 
-    public DataParser()
+    public void readFromFile(String inputFile)
     {
-        dataWriter = new DataWriter();
-    }
-
-    public void readFromFile()
-    {
-        File file = new File(FILE_PATH);
+        File file = new File(inputFile);
 
         Scanner scanner;
         try {
@@ -27,8 +21,6 @@ public class DataParser {
 
                 separate(str);
             }
-
-            dataWriter.fillCSV(wordsMap);
         }
         catch (IOException e) {
             throw new RuntimeException(e);
@@ -37,7 +29,7 @@ public class DataParser {
 
     private void separate(String str) {
         String[] words;
-        words = str.split(" ");
+        words = str.split("[^a-zA-Z0-9]+");
 
         boolean found;
         for (String word : words)
@@ -52,6 +44,5 @@ public class DataParser {
             else
                 wordsMap.put(word, 1);
         }
-
     }
 }
