@@ -1,20 +1,27 @@
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.util.*;
 
-public class Main {
+public class DataWriter {
 
-    public static void main(String[] args) throws IOException {
-        int length = args.length;
-        if (args.length < 2) {
-            System.out.println("usage: java Main <input_file> <output_file>");
-            return;
+    public void fillCSV(Map<String, Integer> words, String outputFile) throws IOException {
+        File csv = new File(outputFile);
+        FileWriter writer = new FileWriter(csv);
+        Map<String, Integer> sortedWords = new LinkedHashMap<>();
+        List<Map.Entry<String, Integer>> sortedList = new ArrayList<>(words.entrySet());
+
+        sortedList.sort(Map.Entry.<String, Integer>comparingByValue().reversed());
+
+        for (Map.Entry<String, Integer> entry : sortedList) {
+            sortedWords.put(entry.getKey(), entry.getValue());
         }
-        String inputFile = args[0];
-        String outputFile = args[1];
-        DataParser dataParser = new DataParser();
-        DataWriter dataWriter = new DataWriter();
-        dataParser.readFromFile(inputFile);
-        dataWriter.fillCSV(dataParser.wordsMap, outputFile);
+        double count = sortedWords.size();
+        System.out.println(count);
+        for (Map.Entry<String, Integer> entry : sortedWords.entrySet()) {
+            writer.write(entry.getKey() + ", " + entry.getValue() + ", " + ((double)entry.getValue()/count * 100) + "% "+ "\n");
+        }
+
+        writer.close();
     }
 }
-
-
