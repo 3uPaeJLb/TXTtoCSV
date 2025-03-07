@@ -5,7 +5,7 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class DataParser {
-    
+    //private static final String FILE_PATH = "C:/Users/marti/Desktop/TXTtoCSV/Separator/src/main/resources/text.txt";
     public Map<String, Integer> wordsMap = new HashMap<>();
 
     public void readFromFile(String inputFile)
@@ -27,7 +27,7 @@ public class DataParser {
         }
     }
 
-   private void separate(String str) {
+    private void separate(String str) {
 
         String[] words = str.split("[^a-zA-Z0-9]+");
 
