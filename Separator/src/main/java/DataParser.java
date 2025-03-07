@@ -27,22 +27,18 @@ public class DataParser {
         }
     }
 
-    private void separate(String str) {
-        String[] words;
-        words = str.split("[^a-zA-Z0-9]+");
+   private void separate(String str) {
 
-        boolean found;
-        for (String word : words)
-        {
-            found = wordsMap.containsKey(word);
+        String[] words = str.split("[^a-zA-Z0-9]+");
 
-            if (found)
-            {
-                int value = wordsMap.get(word);
-                wordsMap.put(word, value + 1);
+        for (String word : words) {
+
+            word = word.trim();
+
+            if (!word.isEmpty()) {
+
+                wordsMap.put(word, wordsMap.getOrDefault(word, 0) + 1);
             }
-            else
-                wordsMap.put(word, 1);
         }
     }
 }
